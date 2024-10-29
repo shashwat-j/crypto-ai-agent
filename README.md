@@ -40,3 +40,10 @@ python app.py
  - Type `0` to end the session.
 
 ## Example
+[image](./screenshots/readme1.png)
+
+[image](./screenshots/readme2.png)
+
+[image](./screenshots/readme3.png)
+
+### More examples in documentation.md

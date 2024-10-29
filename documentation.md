@@ -161,8 +161,8 @@ Works as expected. Great!
 
 Now, I implemented back-and-forth chatting with retained history.
 
-![docs0.png](docs0.png)
-![docs1.png](docs1.png)
+![docs0.png](./screenshots/docs0.png)
+![docs1.png](./screenshots/docs1.png)
 
 
 
@@ -182,7 +182,7 @@ f"You are a helpful assistant that can access the following external functions: 
 
 Even after this, it was still calling the `get_crypto_price` function, when user asked a question not related to crypto. 
 
-![docs2.png](docs2.png)
+![docs2.png](./screenshots/docs2.png)
 
 It is calling the function with argument bitcoin even when i didnt mention bitcoin in conversation.
 there might be something in the prompt that is causing this.
@@ -203,14 +203,14 @@ prompt
 + "If the response from the tool is 'No information found' then IGNORE that and talk normally to the user."
     
 ```
-![docs3.png](docs3.png)
+![docs3.png](./screenshots/docs3.png)
 
 A bit better now. it is still calling the function, but since the fucntion is returning 'no information', the assistant's output is not affected much by it.
 
 ---
 ###More testing
 
-![docs4.png](docs4.png)
+![docs4.png](./screenshots/docs4.png)
 
 
 it seems to get confused by the function response, when the function responds at unrequired times. lets handle this. 
@@ -219,7 +219,7 @@ So, I updated the prompt:
 ```plaintext
 "In case the tool gives any information which not relevant to the conversation, ignore it and do not acknowledge the presence of that disturbance to the user."
 ```
-![docs5.png](docs5.png)
+![docs5.png](./screenshots/docs5.png)
 It still sometimes acknowledged unnecessary data, so I added:
 
 ```diff
@@ -227,7 +227,7 @@ It still sometimes acknowledged unnecessary data, so I added:
 ```
 
 ---
-![docs6.png](docs6.png)
+![docs6.png](./screenshots/docs6.png)
 
 ---
 
