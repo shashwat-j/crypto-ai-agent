@@ -20,7 +20,9 @@ I started by using the prompt example from Together's function calling documenta
 
 Main Prompt
 
-"You are a helpful assistant that can access external functions. The responses from these function calls will be appended to this dialogue. Please provide responses based on the information from these function calls."
+"You are a helpful assistant that can access external functions.
+The responses from these function calls will be appended to this dialogue.
+Please provide responses based on the information from these function calls."
 
 ```
 
@@ -33,38 +35,23 @@ For the function `get_crypto_price`, I used this definition:
 ```json
 
 {
+    "type": "function",
+    "function": {
+      "name": "get_crypto_price",
+      "description": "Fetch the current price of a specified cryptocurrency",
+      "parameters": {
+        "type": "object",
+        "properties": {
+            "crypto_name": {
+                "type": "string",
+                "description": "Name of the cryptocurrency. eg: 'bitcoin', 'ethereum'",
+            },
+        },
+        "required": ["crypto_name"],
+    },
+    }
+  }
 
-"type": "function",
-
-"function": {
-
-"name": "get_crypto_price",
-
-"description": "Fetch the current price of a specified cryptocurrency",
-
-"parameters": {
-
-"type": "object",
-
-"properties": {
-
-"crypto_name": {
-
-"type": "string",
-
-"description": "Name of the cryptocurrency. e.g., 'bitcoin', 'ethereum'"
-
-}
-
-},
-
-"required": ["crypto_name"]
-
-}
-
-}
-
-}
 
 ```
 
@@ -100,8 +87,7 @@ With two calls to the LLM API:
 
   
 
-###note:
-
+### note:
 i am outputting function response as well as assistant response for better understanding whats going on. In real application, we will only output the assistant response
 
   
@@ -128,7 +114,7 @@ The response just noted it would "call the function" even though it had the data
 
   
 
-```json
+```
 
 function response
 
@@ -150,8 +136,11 @@ Tried updating the pompt, to tell it that it is supposed to use the content of t
 
 ```
 
-"You are a helpful assistant that can access external functions. The responses from these function calls will be appended to this dialogue with role as 'tool'. Please provide responses based on the information from these function calls. If the latest message is from 'tool' then use the content given in it and answer the question asked by user"```
-
+"You are a helpful assistant that can access external functions. 
+The responses from these function calls will be appended to this dialogue with role as 'tool'. 
+Please provide responses based on the information from these function calls. 
+If the latest message is from 'tool' then use the content given in it and answer the question asked by user"```
+```
   
 
 **Result:** same ouput
@@ -249,11 +238,10 @@ Then i asked this:
   
 
 ```
-
 user: "What's the current price of bitcoin? tell me"
 
 assistant: "I've accessed the external function to get the current price of Bitcoin. According to the function call, the current price of Bitcoin is 5845620 INR."```
-
+```
   
 
 ---
@@ -346,7 +334,13 @@ lets tell it that it is supposed to call function only when it needs crypto pric
 
 ```
 
-f"You are a helpful assistant that can access the following external functions: {tool_names}. The responses from these function calls will be appended to this dialogue by tool, if required. If any query of the user requires information about one of these, {tool_names}, then please provide responses based on the information from these function calls; otherwise, answer the user directly. If the latest message is from 'tool' then use the content given in it to answer the question asked by the user. Do not mention to the user that you are using function calls or tools."
+f"You are a helpful assistant that can access the following external functions: {tool_names}.
+The responses from these function calls will be appended to this dialogue by tool, if required.
+If any query of the user requires information about one of these, {tool_names},
+then please provide responses based on the information from these function calls;
+otherwise, answer the user directly.
+If the latest message is from 'tool' then use the content given in it to answer the question asked by the user.
+Do not mention to the user that you are using function calls or tools."
 
 ```
 
@@ -395,7 +389,8 @@ So i handle null in the crypto function by returning "no information found."
 
 prompt
 
-+ "If you have decided to call the function but do not know the name of the cryptocurrency for which you want the price, then you can use an empty string as the name to call the function."
++ "If you have decided to call the function but do not know the name of the cryptocurrency for which you want the price,
+then you can use an empty string as the name to call the function."
 
 + "If the response from the tool is 'No information found' then IGNORE that and talk normally to the user."
 
@@ -428,7 +423,8 @@ So, I updated the prompt:
 
 ```plaintext
 
-"In case the tool gives any information which not relevant to the conversation, ignore it and do not acknowledge the presence of that disturbance to the user."
+"In case the tool gives any information which not relevant to the conversation,
+ignore it and do not acknowledge the presence of that disturbance to the user."
 
 ```
 
