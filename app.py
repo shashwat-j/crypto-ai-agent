@@ -6,7 +6,11 @@ def terminal_chat():
         user_input = input("User: ")
         if user_input.lower() == "0":
             break
-        generate_agent_response(user_input)
+        success = generate_agent_response(user_input)
+    
+        if not success:
+            print("Exiting due to error.")
+            break
 
 
 terminal_chat()
