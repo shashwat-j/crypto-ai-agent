@@ -40,6 +40,23 @@ tools = [
         "required": ["crypto_name"],
     },
     }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "language_translation_tool",
+      "description": "Translate user's latest message into English, Or perform language switching",
+      "parameters": {
+        "type": "object",
+        "properties": {
+            "user_message": {
+                "type": "string",
+                "description": "the message to be translated",
+            },
+        },
+        "required": ["user_message"],
+    },
+    }
   }
 ]
 

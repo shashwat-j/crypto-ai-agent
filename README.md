@@ -39,7 +39,16 @@ python app.py
  **Exit Chat**:
  - Type `0` to end the session.
 
-## Example
+## Examples
+
+![docs7.png](./screenshots/docs7.png)
+
+![docs8.png](./screenshots/docs8.png)
+
+![docs9.png](./screenshots/docs9.png)
+
+![docs10.png](./screenshots/docs10.png)
+
 [image](./screenshots/readme1.png)
 
 [image](./screenshots/readme2.png)
